@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación de Boda</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300&display=swap" rel="stylesheet"><style>
+body {
+  margin:0;
+  font-family:'Montserrat', sans-serif;
+  background:#0f0f0f;
+  color:white;
+  text-align:center;
+}
+
+.hero {
+  height:100vh;
+  background:url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486') center/cover no-repeat;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background-blend-mode:darken;
+  background-color:rgba(0,0,0,0.5);
+}
+
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:3.5em;
+  margin:0;
+}
+
+h2 {
+  font-weight:300;
+  margin-top:10px;
+}
+
+.section {
+  padding:60px 20px;
+}
+
+.box {
+  background:#1c1c1c;
+  padding:25px;
+  border-radius:20px;
+  margin:20px auto;
+  max-width:500px;
+}
+
+.countdown {
+  font-size:2em;
+  margin-top:20px;
+}
+
+button {
+  padding:15px 30px;
+  border:none;
+  border-radius:30px;
+  background:#c9a96e;
+  color:black;
+  font-size:1em;
+  cursor:pointer;
+}
+
+button:hover {
+  background:#e6c98f;
+}
+
+.fade {
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 1s ease;
+}
+
+.fade.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+</style></head><body><!-- MUSICA --><audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio><!-- HERO --><div class="hero">
+  <h1>María & Juan</h1>
+  <h2>¡Nos Casamos!</h2>
+</div><!-- DETALLES --><div class="section fade">
+  <div class="box">
+    <p>📅 20 de Diciembre 2026</p>
+    <p>⏰ 5:00 PM</p>
+    <p>📍 Jardín Los Olivos</p>
+  </div>
+</div><!-- CUENTA REGRESIVA --><div class="section fade">
+  <h2>Cuenta regresiva</h2>
+  <div class="countdown" id="countdown"></div>
+</div><!-- MAPA --><div class="section fade">
+  <h2>Ubicación</h2>
+  <iframe
+    src="https://www.google.com/maps?q=Jardin+Los+Olivos&output=embed"
+    width="90%" height="250" style="border:0;border-radius:15px;">
+  </iframe>
+</div><!-- CONFIRMACION --><div class="section fade">
+  <div class="box">
+    <h2>Confirma tu asistencia</h2>
+    <button onclick="window.open('https://wa.me/5219990000000?text=Confirmo%20mi%20asistencia')">
+      Confirmar por WhatsApp
+    </button>
+  </div>
+</div><!-- SCRIPT --><script>
+
+// Cuenta regresiva
+const weddingDate = new Date("Dec 20, 2026 17:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
+
+  const d = Math.floor(distance / (1000*60*60*24));
+  const h = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((distance % (1000*60*60))/(1000*60));
+
+  document.getElementById("countdown").innerHTML = `${d} días ${h} hrs ${m} min`;
+},1000);
+
+// Animaciones al hacer scroll
+const fades = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll', () => {
+  fades.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      el.classList.add('visible');
+    }
+  });
+});
+
+</script></body>
+</html>
